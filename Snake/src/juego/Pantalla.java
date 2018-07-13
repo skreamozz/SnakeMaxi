@@ -61,6 +61,9 @@ public class Pantalla extends Canvas {
 				cuadros[y * CUADROS_ANCHO + x] = 0;
 			}
 		}
+		for (int i = 0; i < this.Pixeles.length; i++) {
+			Pixeles[i] = 0;
+		}
 
 	}
 
@@ -107,7 +110,10 @@ public class Pantalla extends Canvas {
 	public void DibujarEnPos(int despx, int despy, Cuadro cuadro) {
 		for (int y = 0; y < cuadro.LADO; y++) {
 			for (int x = 0; x < cuadro.LADO; x++) {
-				this.Pixeles[((Posiciones(despx, despy)) + (y * dim.width)) + x] = cuadro.Cuadro.getPixel(x, y);
+				int color = cuadro.Cuadro.getPixel(x, y);
+				if (color != 0xffff00ff) {
+					this.Pixeles[((Posiciones(despx, despy)) + (y * dim.width)) + x] = color;
+				}
 			}
 		}
 	}
