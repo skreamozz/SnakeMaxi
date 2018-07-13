@@ -16,6 +16,7 @@ public class Vivora {
 
 	// getters y setters
 	// ----------------------------------------------------------------------------------
+	//
 	public void setx(int x) {
 		this.x = x;
 	}
