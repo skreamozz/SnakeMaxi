@@ -56,11 +56,6 @@ public class Pantalla extends Canvas {
 	}
 
 	public void Limpiar() {
-		for (int y = 0; y < Pantalla.CUADROS_ALTO; y++) {
-			for (int x = 0; x < Pantalla.CUADROS_ANCHO; x++) {
-				cuadros[y * CUADROS_ANCHO + x] = 0;
-			}
-		}
 		for (int i = 0; i < this.Pixeles.length; i++) {
 			Pixeles[i] = 0;
 		}
