@@ -64,31 +64,31 @@ public class Vivora {
 
 	public void Actualizar(int[] mapa) {
 		contador++;
-		// if (contador >= 30000000) {
-		int x = this.x + despx;
-		int y = this.y + despy;
+		if (contador >= 10) {
+			int x = this.x + despx;
+			int y = this.y + despy;
 
-		if (x > Mapa.CUADROS_ANCHO - 2) {
-			x = 1;
-		}
-		if (y > Mapa.CUADROS_ALTO - 2) {
-			y = 1;
-		}
-		if (y < 1) {
-			y = Mapa.CUADROS_ALTO - 2;
-		}
-		if (x < 1) {
-			x = Mapa.CUADROS_ANCHO - 2;
-		}
-		if (mapa[y * Mapa.CUADROS_ANCHO + x] != 0) {
-			Colicion(mapa[y * Mapa.CUADROS_ANCHO + x]);
-		}
-		MoverCuerpos();
+			if (x > Mapa.CUADROS_ANCHO - 2) {
+				x = 1;
+			}
+			if (y > Mapa.CUADROS_ALTO - 2) {
+				y = 1;
+			}
+			if (y < 1) {
+				y = Mapa.CUADROS_ALTO - 2;
+			}
+			if (x < 1) {
+				x = Mapa.CUADROS_ANCHO - 2;
+			}
+			if (mapa[y * Mapa.CUADROS_ANCHO + x] != 0) {
+				Colicion(mapa[y * Mapa.CUADROS_ANCHO + x]);
+			}
+			MoverCuerpos();
 
-		this.y = y;
-		this.x = x;
-		contador = 0;
-		// }
+			this.y = y;
+			this.x = x;
+			contador = 0;
+		}
 
 	}
 

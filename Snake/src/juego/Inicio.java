@@ -26,7 +26,7 @@ public class Inicio extends Thread implements Runnable {
 		ventana.pack();
 		ventana.requestFocus();
 		pant.requestFocus();
-		Iniciar();
+		iniciar();
 	}
 
 	public static void main(String[] args) {
@@ -48,6 +48,7 @@ public class Inicio extends Thread implements Runnable {
 		while (enMarcha) {
 			final long inicioBucle = System.nanoTime();
 			tiempoTranscurrido = inicioBucle - referenciaActualizacion;
+			referenciaActualizacion = inicioBucle;
 			delta += tiempoTranscurrido / NS_POR_ACTUALIZACION;
 			while (delta >= 1) {
 				Actualizar();
@@ -78,37 +79,23 @@ public class Inicio extends Thread implements Runnable {
 		pant.Dibujar();
 	}
 
-	private void Iniciar() {
-		while (enMarcha) {
-			if (!enPausa) {
-				Actualizar();
-
-			}
-
-			if (Vivora.vidas == 0) {
-				break;
-			}
-			try {
-				if (Velocidad < 50)
-					Velocidad = VelocidadInicial;
-				if (esBoost) {
-					if (Boost == 0) {
-						Velocidad = VelocidadInicial;
-						Boost = 30;
-						esBoost = false;
-					}
-					Boost--;
-				}
-				Thread.sleep(Velocidad);
-
-			} catch (InterruptedException e) {
-
-				e.printStackTrace();
-			}
-
-		}
-		ventana.dispose();
-
-	}
+	/*
+	 * private void Iniciar() { while (enMarcha) { if (!enPausa) { Actualizar();
+	 * 
+	 * }
+	 * 
+	 * if (Vivora.vidas == 0) { break; } try { if (Velocidad < 50) Velocidad =
+	 * VelocidadInicial; if (esBoost) { if (Boost == 0) { Velocidad =
+	 * VelocidadInicial; Boost = 30; esBoost = false; } Boost--; }
+	 * Thread.sleep(Velocidad);
+	 * 
+	 * } catch (InterruptedException e) {
+	 * 
+	 * e.printStackTrace(); }
+	 * 
+	 * } ventana.dispose();
+	 * 
+	 * }
+	 */
 
 }
