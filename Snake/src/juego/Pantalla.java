@@ -63,9 +63,9 @@ public class Pantalla extends Canvas {
 	}
 
 	public void Dibujar() {
-		Limpiar();
 		mapa.Dibujar(cuadros);
 		tablero.Dibujar(cuadros);
+		Limpiar();
 		for (int y = 0; y < Pantalla.CUADROS_ALTO; y++) {
 			for (int x = 0; x < Pantalla.CUADROS_ANCHO; x++) {
 				switch (cuadros[y * this.CUADROS_ANCHO + x]) {
@@ -73,6 +73,18 @@ public class Pantalla extends Canvas {
 					DibujarEnPos(x, y, this.ColeccionCuadros[0]);
 					break;
 				case 1:
+					if (this.Posiciones(x, y) == this.Posiciones(x, 8)) {
+						this.ColeccionCuadros[1].setSprite(CuadroPared.A);
+					}
+					if (this.Posiciones(x, y) == this.Posiciones(x, 8 + Mapa.CUADROS_ALTO - 1)) {
+						this.ColeccionCuadros[1].setSprite(CuadroPared.AB);
+					}
+					if (this.Posiciones(x, y) == this.Posiciones(1 + Mapa.CUADROS_ANCHO - 1, y)) {
+						this.ColeccionCuadros[1].setSprite(CuadroPared.I);
+					}
+					if (this.Posiciones(x, y) == this.Posiciones(1, y)) {
+						this.ColeccionCuadros[1].setSprite(CuadroPared.D);
+					}
 					DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case 2:
@@ -103,8 +115,8 @@ public class Pantalla extends Canvas {
 	}
 
 	public void DibujarEnPos(int despx, int despy, Cuadro cuadro) {
-		for (int y = 0; y < cuadro.LADO; y++) {
-			for (int x = 0; x < cuadro.LADO; x++) {
+		for (int y = 0; y < Cuadro.LADO; y++) {
+			for (int x = 0; x < Cuadro.LADO; x++) {
 				int color = cuadro.Cuadro.getPixel(x, y);
 				if (color != 0xffff00ff) {
 					this.Pixeles[((Posiciones(despx, despy)) + (y * dim.width)) + x] = color;

@@ -22,7 +22,7 @@ public class Tablero {
 	public void llenar() {
 		for (int y = 0; y < CUADROS_ALTO; y++) {
 			for (int x = 0; x < CUADROS_ANCHO; x++) {
-				cuadros[y * CUADROS_ANCHO + x] = 1;
+				cuadros[y * CUADROS_ANCHO + x] = 0;
 			}
 		}
 	}

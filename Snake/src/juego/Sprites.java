@@ -18,7 +18,6 @@ public final class Sprites {
 		this.y = fila * lado;
 
 		this.hoja = hoja;
-
 		for (int y = 0; y < lado; y++) {
 			for (int x = 0; x < lado; x++) {
 				pixeles[y * lado + x] = hoja.pixeles[(y + this.y) * hoja.getAncho() + (x + this.x)];

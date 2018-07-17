@@ -28,6 +28,10 @@ public class Cuadro {
 	public void setSolidez(boolean solidez) {
 		this.solidez = solidez;
 	}
+
+	public void setSprite(Sprites cuadro) {
+		this.Cuadro = cuadro;
+	}
 	// ---------------------------------------------------------------
 	// fin get y set
 

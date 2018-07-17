@@ -13,6 +13,7 @@ public class Vivora {
 	public static int despx, despy;
 	public static int vidas = 3;
 	public static int puntos = 0;
+	private static int contador = 0;
 
 	// getters y setters
 	// ----------------------------------------------------------------------------------
@@ -62,6 +63,8 @@ public class Vivora {
 	}
 
 	public void Actualizar(int[] mapa) {
+		contador++;
+		// if (contador >= 30000000) {
 		int x = this.x + despx;
 		int y = this.y + despy;
 
@@ -84,6 +87,8 @@ public class Vivora {
 
 		this.y = y;
 		this.x = x;
+		contador = 0;
+		// }
 
 	}
 
