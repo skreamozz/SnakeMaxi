@@ -95,10 +95,11 @@ public class Vivora {
 	private void Colicion(int val) {
 		switch (val) {
 		case CuadroPared.ID:
-			// TODO poner que se hace cuando choca contra la pared;
 			break;
 		case CuadroCuerpo.ID:
 			vidas -= 1;
+			if (vidas <= 0)
+				Inicio.enMarcha = false;
 			x = 1;
 			y = 1;
 			cuerpos.clear();

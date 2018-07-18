@@ -67,11 +67,19 @@ public class Inicio extends Thread implements Runnable {
 
 	private void iniciar() {
 		this.start();
+		try {
+			this.join();
+			ventana.dispose();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	private void Actualizar() {
-		pant.Actualizar();
+		if (!enPausa) {
+			pant.Actualizar();
+		}
 		contador++;
 	}
 

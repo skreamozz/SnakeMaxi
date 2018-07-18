@@ -85,6 +85,19 @@ public class Pantalla extends Canvas {
 					if (this.Posiciones(x, y) == this.Posiciones(1, y)) {
 						this.ColeccionCuadros[1].setSprite(CuadroPared.D);
 					}
+					if (this.Posiciones(x, y) == this.Posiciones(1, 8)) {
+						this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaI);
+					}
+					if (this.Posiciones(x, y) == this.Posiciones(Mapa.CUADROS_ANCHO, 8)) {
+						this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaD);
+					}
+					if (this.Posiciones(x, y) == this.Posiciones(Mapa.CUADROS_ANCHO, Mapa.CUADROS_ALTO + 7)) {
+						this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaID);
+					}
+					if (this.Posiciones(x, y) == this.Posiciones(1, Mapa.CUADROS_ALTO + 7)) {
+						this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaII);
+					}
+
 					DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case 2:
