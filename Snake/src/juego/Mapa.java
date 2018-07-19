@@ -7,20 +7,12 @@ public class Mapa {
 	public static final int CUADROS_ALTO = 13, CUADROS_ANCHO = 16;
 	public static Cuadro[] cuadros = new Cuadro[CUADROS_ALTO * CUADROS_ANCHO];
 	public Posicion pos;
-	CargarMapa Cargar;
 	Vivora vivora = new Vivora(5, 5);
 	private int[] objetos = new int[this.CUADROS_ALTO * this.CUADROS_ANCHO];
-	private int[] Mapa1 = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
 	public Mapa(Posicion pos) {
 		this.pos = pos;
-		Cargar = new CargarMapa("/mapas/Mapa1.png", 16, 13);
-		objetos = Cargar.Pixeles.clone();
+		objetos = CargarMapa.mapa1.obtenerPixeles().clone();
 		new Comida();
 	}
 
@@ -45,7 +37,7 @@ public class Mapa {
 		for (int i = 0; i < objetos.length; i++) {
 			objetos[i] = 0;
 		}
-		objetos = Cargar.Pixeles.clone();
+		objetos = CargarMapa.mapa1.obtenerPixeles().clone();
 	}
 
 	public void Actualizar() {
