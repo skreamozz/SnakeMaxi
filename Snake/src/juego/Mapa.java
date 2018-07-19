@@ -19,7 +19,7 @@ public class Mapa {
 
 	public Mapa(Posicion pos) {
 		this.pos = pos;
-		Cargar = new CargarMapa("/hojas/Mapa1.png", 16, 13);
+		Cargar = new CargarMapa("/mapas/Mapa1.png", 16, 13);
 		objetos = Cargar.Pixeles.clone();
 		new Comida();
 	}
