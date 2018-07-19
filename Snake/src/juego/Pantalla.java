@@ -72,33 +72,40 @@ public class Pantalla extends Canvas {
 				case 0:
 					DibujarEnPos(x, y, this.ColeccionCuadros[0]);
 					break;
-				case 1:
-					if (this.Posiciones(x, y) == this.Posiciones(x, 8)) {
-						this.ColeccionCuadros[1].setSprite(CuadroPared.A);
-					}
-					if (this.Posiciones(x, y) == this.Posiciones(x, 8 + Mapa.CUADROS_ALTO - 1)) {
-						this.ColeccionCuadros[1].setSprite(CuadroPared.AB);
-					}
-					if (this.Posiciones(x, y) == this.Posiciones(1 + Mapa.CUADROS_ANCHO - 1, y)) {
-						this.ColeccionCuadros[1].setSprite(CuadroPared.I);
-					}
-					if (this.Posiciones(x, y) == this.Posiciones(1, y)) {
-						this.ColeccionCuadros[1].setSprite(CuadroPared.D);
-					}
-					if (this.Posiciones(x, y) == this.Posiciones(1, 8)) {
-						this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaI);
-					}
-					if (this.Posiciones(x, y) == this.Posiciones(Mapa.CUADROS_ANCHO, 8)) {
-						this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaD);
-					}
-					if (this.Posiciones(x, y) == this.Posiciones(Mapa.CUADROS_ANCHO, Mapa.CUADROS_ALTO + 7)) {
-						this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaID);
-					}
-					if (this.Posiciones(x, y) == this.Posiciones(1, Mapa.CUADROS_ALTO + 7)) {
-						this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaII);
-					}
+				case 0xff00ff00:
+					this.ColeccionCuadros[1].setSprite(CuadroPared.AB);
+					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
+					break;
+				case 0xff00f700:
 
-					DibujarEnPos(x, y, this.ColeccionCuadros[1]);
+					this.ColeccionCuadros[1].setSprite(CuadroPared.I);
+					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
+					break;
+
+				case 0xff00f600:
+					this.ColeccionCuadros[1].setSprite(CuadroPared.A);
+					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
+
+					break;
+				case 0xff00f500:
+					this.ColeccionCuadros[1].setSprite(CuadroPared.D);
+					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
+					break;
+				case 0xff00f400:
+					this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaID);
+					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
+					break;
+				case 0xff00f300:
+					this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaII);
+					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
+					break;
+				case 0xff00f200:
+					this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaD);
+					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
+					break;
+				case 0xff00f100:
+					this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaI);
+					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case 2:
 					DibujarEnPos(x, y, this.ColeccionCuadros[2]);
@@ -120,6 +127,7 @@ public class Pantalla extends Canvas {
 			}
 		}
 		this.repaint();
+
 	}
 
 	public void Actualizar() {

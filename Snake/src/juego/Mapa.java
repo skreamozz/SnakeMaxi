@@ -1,13 +1,13 @@
 package juego;
 
-import java.awt.image.BufferedImage;
+import componentes.CargarMapa;
 
 public class Mapa {
 
 	public static final int CUADROS_ALTO = 13, CUADROS_ANCHO = 16;
 	public static Cuadro[] cuadros = new Cuadro[CUADROS_ALTO * CUADROS_ANCHO];
 	public Posicion pos;
-	BufferedImage Mapa2;
+	CargarMapa Cargar;
 	Vivora vivora = new Vivora(5, 5);
 	private int[] objetos = new int[this.CUADROS_ALTO * this.CUADROS_ANCHO];
 	private int[] Mapa1 = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -19,7 +19,8 @@ public class Mapa {
 
 	public Mapa(Posicion pos) {
 		this.pos = pos;
-		objetos = Mapa1.clone();
+		Cargar = new CargarMapa("/hojas/Mapa1.png", 16, 13);
+		objetos = Cargar.Pixeles.clone();
 		new Comida();
 	}
 
@@ -44,7 +45,7 @@ public class Mapa {
 		for (int i = 0; i < objetos.length; i++) {
 			objetos[i] = 0;
 		}
-		objetos = Mapa1.clone();
+		objetos = Cargar.Pixeles.clone();
 	}
 
 	public void Actualizar() {
