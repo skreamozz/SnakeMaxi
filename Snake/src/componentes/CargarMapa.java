@@ -33,4 +33,12 @@ public class CargarMapa {
 		return this.Pixeles;
 	}
 
+	public int obtenerAlto() {
+		return alto;
+	}
+
+	public int obtenerAncho() {
+		return ancho;
+	}
+
 }

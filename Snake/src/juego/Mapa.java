@@ -5,14 +5,13 @@ import componentes.CargarMapa;
 public class Mapa {
 
 	public static final int CUADROS_ALTO = 13, CUADROS_ANCHO = 16;
-	public static Cuadro[] cuadros = new Cuadro[CUADROS_ALTO * CUADROS_ANCHO];
 	public Posicion pos;
-	Vivora vivora = new Vivora(5, 5);
+	public Vivora vivora = new Vivora(5, 5);
 	private int[] objetos = new int[this.CUADROS_ALTO * this.CUADROS_ANCHO];
 
-	public Mapa(Posicion pos) {
+	public Mapa(Posicion pos, CargarMapa mapa) {
 		this.pos = pos;
-		objetos = CargarMapa.mapa1.obtenerPixeles().clone();
+		objetos = mapa.obtenerPixeles().clone();
 		new Comida();
 	}
 

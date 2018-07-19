@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import componentes.CargarMapa;
 import componentes.Controles;
 
 public class Pantalla extends Canvas {
@@ -30,7 +31,7 @@ public class Pantalla extends Canvas {
 		Pixeles = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
 		cuadros = new int[CUADROS_ALTO * CUADROS_ANCHO];
 		this.setSize(dim);
-		mapa = new Mapa(new Posicion(1, 8));
+		mapa = new Mapa(new Posicion(1, 8), CargarMapa.mapa1);
 		tablero = new Tablero(new Posicion(1, 1));
 
 	}
