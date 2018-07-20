@@ -2,7 +2,6 @@ package juego;
 
 import java.awt.Point;
 import java.util.LinkedList;
-import java.util.Random;
 
 public class Vivora {
 
@@ -14,6 +13,7 @@ public class Vivora {
 	public static int vidas = 3;
 	public static int puntos = 0;
 	private static int contador = 0;
+	private static char direccion = 'd';
 
 	// getters y setters
 	// ----------------------------------------------------------------------------------
@@ -86,11 +86,13 @@ public class Vivora {
 				// pared derecha
 				x = Mapa.CUADROS_ANCHO - 2;
 				break;
-
-			}
-
-			if (mapa[y * Mapa.CUADROS_ANCHO + x] != 0) {
+			case 0:
+				break;
+			default:
+				// en caso de que no sea ninguno de los anteriores es por que esta en colicion.
 				Colicion(mapa[y * Mapa.CUADROS_ANCHO + x]);
+				break;
+
 			}
 			MoverCuerpos();
 
@@ -103,8 +105,6 @@ public class Vivora {
 
 	private void Colicion(int val) {
 		switch (val) {
-		case CuadroPared.ID:
-			break;
 		case CuadroCuerpo.ID:
 			vidas -= 1;
 			if (vidas <= 0)
@@ -115,13 +115,13 @@ public class Vivora {
 			cuerpos.add(new Point(x, y));
 			break;
 		case CuadroComida.ID:
-			Random rand = new Random();
-			int r = rand.nextInt(2) + 1;
 			cuerpos.add(new Point(cuerpos.get(cuerpos.size() - 1).x, cuerpos.get(cuerpos.size() - 1).y));
 			Comida.GenerarNueva();
 			for (int i = 0; i < cuerpos.size(); i++) {
-				if (cuerpos.get(i).x == Comida.x && cuerpos.get(i).x == Comida.y) {
+				if (cuerpos.get(i).x == Comida.x && cuerpos.get(i).y == Comida.y) {
+					i = 0;
 					Comida.GenerarNueva();
+
 				}
 			}
 			puntos += Comida.Valor;
@@ -133,7 +133,8 @@ public class Vivora {
 			Comida.GenerarNueva();
 
 			for (int i = 0; i < cuerpos.size(); i++) {
-				if (cuerpos.get(i).x == Comida.x && cuerpos.get(i).x == Comida.y) {
+				if (cuerpos.get(i).x == Comida.x && cuerpos.get(i).y == Comida.y) {
+					i = 0;
 					Comida.GenerarNueva();
 				}
 			}

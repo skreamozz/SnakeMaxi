@@ -108,20 +108,20 @@ public class Pantalla extends Canvas {
 					this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaI);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
-				case 2:
-					DibujarEnPos(x, y, this.ColeccionCuadros[2]);
+				case CuadroCabeza.ID:
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCabeza.ID]);
 					break;
-				case 3:
-					DibujarEnPos(x, y, this.ColeccionCuadros[3]);
+				case CuadroCuerpo.ID:
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCuerpo.ID]);
 					break;
-				case 4:
-					DibujarEnPos(x, y, this.ColeccionCuadros[4]);
+				case CuadroComida.ID:
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroComida.ID]);
 					break;
-				case 5:
-					DibujarEnPos(x, y, this.ColeccionCuadros[5]);
+				case CuadroCola.ID:
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCola.ID]);
 					break;
-				case 6:
-					DibujarEnPos(x, y, this.ColeccionCuadros[6]);
+				case CuadroComidaBost.ID:
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroComidaBost.ID]);
 					break;
 				}
 

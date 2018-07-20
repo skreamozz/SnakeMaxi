@@ -2,7 +2,7 @@ package juego;
 
 public class CuadroCuerpo extends Cuadro {
 
-	private static final int color = 0xff0000;
+	private static final int color = 0xffff0000;
 	private static final boolean solidez = true;
 	private int x, y;
 	public static final int ID = 3;

@@ -2,7 +2,7 @@ package juego;
 
 public class CuadroCabeza extends Cuadro {
 
-	private static final int color = 0x44ff44;
+	private static final int color = 0xff00ff00;
 	private static final boolean solidez = true;
 	private int x, y;
 	public static final int ID = 2;
@@ -23,10 +23,6 @@ public class CuadroCabeza extends Cuadro {
 
 	public void setx(int x) {
 		this.x = x;
-	}
-
-	public int getID() {
-		return ID;
 	}
 	// ---------------------------------------------------------------
 	// fin get set
