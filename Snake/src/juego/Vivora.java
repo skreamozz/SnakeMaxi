@@ -68,18 +68,27 @@ public class Vivora {
 			int x = this.x + despx;
 			int y = this.y + despy;
 
-			if (x > Mapa.CUADROS_ANCHO - 2) {
-				x = 1;
-			}
-			if (y > Mapa.CUADROS_ALTO - 2) {
+			switch (mapa[y * Mapa.CUADROS_ANCHO + x]) {
+			case 0xff00ff00:
+				// pared abajo
 				y = 1;
-			}
-			if (y < 1) {
+				break;
+			case 0xff00f700:
+				// pared Izquierda
+				x = 1;
+
+				break;
+			case 0xff00f600:
+				// pared Arriba
 				y = Mapa.CUADROS_ALTO - 2;
-			}
-			if (x < 1) {
+				break;
+			case 0xff00f500:
+				// pared derecha
 				x = Mapa.CUADROS_ANCHO - 2;
+				break;
+
 			}
+
 			if (mapa[y * Mapa.CUADROS_ANCHO + x] != 0) {
 				Colicion(mapa[y * Mapa.CUADROS_ANCHO + x]);
 			}

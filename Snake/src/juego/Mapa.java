@@ -7,11 +7,13 @@ public class Mapa {
 	public static final int CUADROS_ALTO = 13, CUADROS_ANCHO = 16;
 	public Posicion pos;
 	public Vivora vivora = new Vivora(5, 5);
+	private int[] mapa;
 	private int[] objetos = new int[this.CUADROS_ALTO * this.CUADROS_ANCHO];
 
 	public Mapa(Posicion pos, CargarMapa mapa) {
 		this.pos = pos;
-		objetos = mapa.obtenerPixeles().clone();
+		this.mapa = mapa.obtenerPixeles().clone();
+		objetos = this.mapa.clone();
 		new Comida();
 	}
 
@@ -33,10 +35,7 @@ public class Mapa {
 	}
 
 	public void Limpiar() {
-		for (int i = 0; i < objetos.length; i++) {
-			objetos[i] = 0;
-		}
-		objetos = CargarMapa.mapa1.obtenerPixeles().clone();
+		objetos = this.mapa.clone();
 	}
 
 	public void Actualizar() {

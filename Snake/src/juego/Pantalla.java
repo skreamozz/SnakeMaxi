@@ -79,7 +79,7 @@ public class Pantalla extends Canvas {
 					break;
 				case 0xff00f700:
 
-					this.ColeccionCuadros[1].setSprite(CuadroPared.I);
+					this.ColeccionCuadros[1].setSprite(CuadroPared.D);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 
@@ -89,7 +89,7 @@ public class Pantalla extends Canvas {
 
 					break;
 				case 0xff00f500:
-					this.ColeccionCuadros[1].setSprite(CuadroPared.D);
+					this.ColeccionCuadros[1].setSprite(CuadroPared.I);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case 0xff00f400:
