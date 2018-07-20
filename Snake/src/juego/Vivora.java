@@ -119,7 +119,6 @@ public class Vivora {
 			break;
 		case CuadroComidaBost.ID:
 			cuerpos.add(new Point(cuerpos.get(cuerpos.size() - 1).x, cuerpos.get(cuerpos.size() - 1).y));
-			Inicio.esBoost = true;
 			Vivora.puntos += ComidaBoost.Valor + 5;
 			ComidaBoost.Bostear();
 			Comida.GenerarNueva();

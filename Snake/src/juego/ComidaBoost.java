@@ -6,7 +6,6 @@ public class ComidaBoost extends Comida {
 	}
 
 	public static void Bostear() {
-		Inicio.Velocidad += -50;
 	}
 
 }
