@@ -13,7 +13,7 @@ public class Vivora {
 	public static int vidas = 3;
 	public static int puntos = 0;
 	private static int contador = 0;
-	private static char direccion = 'd';
+	public static char direccion = 'd';
 
 	// getters y setters
 	// ----------------------------------------------------------------------------------
@@ -67,6 +67,16 @@ public class Vivora {
 		if (contador >= 10) {
 			int x = this.x + despx;
 			int y = this.y + despy;
+
+			if (despx > 0 && despy == 0) {
+				this.direccion = 'd';
+			} else if (despx < 0 && despy == 0) {
+				this.direccion = 'i';
+			} else if (despx == 0 && despy > 0) {
+				this.direccion = 's';
+			} else if (despx == 0 && despy < 0) {
+				this.direccion = 'w';
+			}
 
 			switch (mapa[y * Mapa.CUADROS_ANCHO + x]) {
 			case 0xff00ff00:

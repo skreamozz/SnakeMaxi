@@ -109,6 +109,20 @@ public class Pantalla extends Canvas {
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case CuadroCabeza.ID:
+					switch (Vivora.direccion) {
+					case 'd':
+						ColeccionCuadros[CuadroCabeza.ID].setSprite(CuadroCabeza.Derecha);
+						break;
+					case 'i':
+						ColeccionCuadros[CuadroCabeza.ID].setSprite(CuadroCabeza.Izquierda);
+						break;
+					case 's':
+						ColeccionCuadros[CuadroCabeza.ID].setSprite(CuadroCabeza.Abajo);
+						break;
+					case 'w':
+						ColeccionCuadros[CuadroCabeza.ID].setSprite(CuadroCabeza.Arriba);
+						break;
+					}
 					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCabeza.ID]);
 					break;
 				case CuadroCuerpo.ID:
