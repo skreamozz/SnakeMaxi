@@ -1,11 +1,10 @@
 package juego;
 
-import java.awt.Point;
 import java.util.LinkedList;
 
 public class Vivora {
 
-	private LinkedList<Point> cuerpos = new LinkedList<Point>();
+	private LinkedList<Cuerpo> cuerpos = new LinkedList<Cuerpo>();
 	private int x, y;
 	private int largo = 1;
 	private Cola cola = new Cola();
@@ -47,7 +46,7 @@ public class Vivora {
 		despy = 0;
 		this.x = x;
 		this.y = y;
-		cuerpos.add(new Point(x, y));
+		cuerpos.add(new Cuerpo(x, y));
 		cola.x = this.x;
 		cola.y = this.y;
 	}
@@ -57,9 +56,10 @@ public class Vivora {
 
 		for (int i = 0; i < cuerpos.size(); i++) {
 
-			mapa[cuerpos.get(i).y * Mapa.CUADROS_ANCHO + cuerpos.get(i).x] = CuadroCuerpo.ID;
+			mapa[cuerpos.get(i).y * Mapa.CUADROS_ANCHO + cuerpos.get(i).x] = CuadroCuerpo
+					.ObtenerID(cuerpos.get(i).Estado);
 		}
-		mapa[cola.y * Mapa.CUADROS_ANCHO + cola.x] = CuadroCola.ID;
+		mapa[cola.y * Mapa.CUADROS_ANCHO + cola.x] = CuadroCola.ObtenerID(cola.Direccion);
 	}
 
 	public void Actualizar(int[] mapa) {
@@ -96,36 +96,42 @@ public class Vivora {
 				// pared derecha
 				x = Mapa.CUADROS_ANCHO - 2;
 				break;
-			case 0:
+			case 0xffffffff:
 				break;
 			default:
 				// en caso de que no sea ninguno de los anteriores es por que esta en colicion.
-				Colicion(mapa[y * Mapa.CUADROS_ANCHO + x]);
+				if (Colicion(mapa[y * Mapa.CUADROS_ANCHO + x]))
+					return;
 				break;
 
 			}
 			MoverCuerpos();
-
 			this.y = y;
 			this.x = x;
+			DireccionarCuerpos();
 			contador = 0;
 		}
 
 	}
 
-	private void Colicion(int val) {
+	private void ColicionConCuerpo() {
+		vidas -= 1;
+		if (vidas <= 0)
+			Inicio.enMarcha = false;
+		x = Mapa.CUADROS_ANCHO / 2;
+		y = Mapa.CUADROS_ALTO / 2;
+		this.direccion = 'd';
+		cuerpos.clear();
+		cuerpos.add(new Cuerpo(x - 1, y));
+	}
+
+	private boolean Colicion(int val) {
 		switch (val) {
-		case CuadroCuerpo.ID:
-			vidas -= 1;
-			if (vidas <= 0)
-				Inicio.enMarcha = false;
-			x = 1;
-			y = 1;
-			cuerpos.clear();
-			cuerpos.add(new Point(x, y));
-			break;
+		case CuadroCuerpo.IDarr:
+			ColicionConCuerpo();
+			return true;
 		case CuadroComida.ID:
-			cuerpos.add(new Point(cuerpos.get(cuerpos.size() - 1).x, cuerpos.get(cuerpos.size() - 1).y));
+			cuerpos.add(new Cuerpo(cuerpos.get(cuerpos.size() - 1).x, cuerpos.get(cuerpos.size() - 1).y));
 			Comida.GenerarNueva();
 			for (int i = 0; i < cuerpos.size(); i++) {
 				if (cuerpos.get(i).x == Comida.x && cuerpos.get(i).y == Comida.y) {
@@ -135,9 +141,9 @@ public class Vivora {
 				}
 			}
 			puntos += Comida.Valor;
-			break;
+			return false;
 		case CuadroComidaBost.ID:
-			cuerpos.add(new Point(cuerpos.get(cuerpos.size() - 1).x, cuerpos.get(cuerpos.size() - 1).y));
+			cuerpos.add(new Cuerpo(cuerpos.get(cuerpos.size() - 1).x, cuerpos.get(cuerpos.size() - 1).y));
 			Vivora.puntos += ComidaBoost.Valor + 5;
 			ComidaBoost.Bostear();
 			Comida.GenerarNueva();
@@ -148,8 +154,9 @@ public class Vivora {
 					Comida.GenerarNueva();
 				}
 			}
-			break;
+			return false;
 		}
+		return false;
 
 	}
 
@@ -170,4 +177,129 @@ public class Vivora {
 
 	}
 
+	private void DireccionarCuerpos() {
+		if (cuerpos.get(cuerpos.size() - 1).x > cola.x) {
+			if (cola.x < Mapa.CUADROS_ANCHO / 2 && cuerpos.get(cuerpos.size() - 1).x > Mapa.CUADROS_ANCHO / 2) {
+				cola.Direccion = 'a';
+			} else {
+				cola.Direccion = 'd';
+			}
+		} else if (cuerpos.get(cuerpos.size() - 1).x < cola.x) {
+			if (cola.x > Mapa.CUADROS_ANCHO / 2 && cuerpos.get(cuerpos.size() - 1).x < Mapa.CUADROS_ANCHO / 2) {
+				cola.Direccion = 'd';
+			} else {
+				cola.Direccion = 'a';
+			}
+		} else if (cuerpos.get(cuerpos.size() - 1).y > cola.y) {
+			if (cola.y < Mapa.CUADROS_ALTO / 2 && cuerpos.get(cuerpos.size() - 1).y > Mapa.CUADROS_ALTO / 2) {
+				cola.Direccion = 'w';
+			} else {
+				cola.Direccion = 's';
+			}
+		} else if (cuerpos.get(cuerpos.size() - 1).y < cola.y) {
+			if (cola.y > Mapa.CUADROS_ALTO / 2 && cuerpos.get(cuerpos.size() - 1).y < Mapa.CUADROS_ALTO / 2) {
+				cola.Direccion = 's';
+			} else {
+				cola.Direccion = 'w';
+			}
+		}
+		if (cuerpos.size() > 1) {
+			for (int i = cuerpos.size() - 1; i > 0; i--) {
+				cuerpos.get(i).Estado = cuerpos.get(i - 1).Estado;
+			}
+			cuerpos.get(0).Estado = Direccion(this.x, this.y, cuerpos.get(0), cuerpos.get(1));
+		} else {
+			cuerpos.get(0).Estado = Direccion(this.x, this.y, cuerpos.get(0), this.cola);
+		}
+	}
+
+	private char Direccion(int CabezaX, int CabezaY, Cuerpo cuerpo, Cuerpo cuerpoAnt) {
+		if (cuerpo.x < CabezaX) {
+			if (cuerpoAnt.x > cuerpo.x) {
+				return 'a';
+			} else if (cuerpoAnt.x < cuerpo.x) {
+				return 'd';
+			} else if (cuerpoAnt.y > cuerpo.y) {
+				return 'e';
+			} else if (cuerpoAnt.y < cuerpo.y) {
+				return 'x';
+			}
+		} else if (cuerpo.x > CabezaX) {
+			if (cuerpoAnt.x < cuerpo.x) {
+				return 'd';
+			} else if (cuerpoAnt.x > cuerpo.x) {
+				return 'a';
+			} else if (cuerpoAnt.y > cuerpo.y) {
+				return 'q';
+			} else if (cuerpoAnt.y < cuerpo.y) {
+				return 'z';
+			}
+		} else if (cuerpo.y > CabezaY) {
+			if (cuerpoAnt.y < cuerpo.y) {
+				return 's';
+			} else if (cuerpoAnt.y > cuerpo.y) {
+				return 'w';
+			} else if (cuerpoAnt.x > cuerpo.x) {
+				return 'x';
+			} else if (cuerpoAnt.x < cuerpo.x) {
+				return 'z';
+			}
+		} else if (cuerpo.y < CabezaY) {
+			if (cuerpoAnt.y > cuerpo.y) {
+				return 'w';
+			} else if (cuerpoAnt.y < cuerpo.y) {
+				return 's';
+			} else if (cuerpoAnt.x > cuerpo.x) {
+				return 'e';
+			} else if (cuerpoAnt.x < cuerpo.x) {
+				return 'q';
+			}
+		}
+		return 'd';
+	}
+
+	private char Direccion(int CabezaX, int CabezaY, Cuerpo cuerpo, Cola cuerpoAnt) {
+		if (cuerpo.x < CabezaX) {
+			if (cuerpoAnt.x > cuerpo.x) {
+				return 'a';
+			} else if (cuerpoAnt.x < cuerpo.x) {
+				return 'd';
+			} else if (cuerpoAnt.y > cuerpo.y) {
+				return 'e';
+			} else if (cuerpoAnt.y < cuerpo.y) {
+				return 'x';
+			}
+		} else if (cuerpo.x > CabezaX) {
+			if (cuerpoAnt.x < cuerpo.x) {
+				return 'd';
+			} else if (cuerpoAnt.x > cuerpo.x) {
+				return 'a';
+			} else if (cuerpoAnt.y > cuerpo.y) {
+				return 'q';
+			} else if (cuerpoAnt.y < cuerpo.y) {
+				return 'z';
+			}
+		} else if (cuerpo.y > CabezaY) {
+			if (cuerpoAnt.y < cuerpo.y) {
+				return 's';
+			} else if (cuerpoAnt.y > cuerpo.y) {
+				return 'w';
+			} else if (cuerpoAnt.x > cuerpo.x) {
+				return 'x';
+			} else if (cuerpoAnt.x < cuerpo.x) {
+				return 'z';
+			}
+		} else if (cuerpo.y < CabezaY) {
+			if (cuerpoAnt.y > cuerpo.y) {
+				return 'w';
+			} else if (cuerpoAnt.y < cuerpo.y) {
+				return 's';
+			} else if (cuerpoAnt.x > cuerpo.x) {
+				return 'e';
+			} else if (cuerpoAnt.x < cuerpo.x) {
+				return 'q';
+			}
+		}
+		return 'd';
+	}
 }

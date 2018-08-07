@@ -22,10 +22,10 @@ public class Pantalla extends Canvas {
 	private Cuadro[] ColeccionCuadros = { new CuadroVacio(), new CuadroPared(), new CuadroCabeza(), new CuadroCuerpo(),
 			new CuadroComida(), new CuadroCola(), new CuadroComidaBost() };
 
-	private Controles c = new Controles();
+	private Controles control = new Controles();
 
 	public Pantalla(Dimension dim) {
-		this.addKeyListener(c);
+		this.addKeyListener(control);
 		this.dim = dim;
 		imagen = new BufferedImage(dim.width, dim.height, BufferedImage.TYPE_INT_RGB);
 		Pixeles = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
@@ -71,69 +71,138 @@ public class Pantalla extends Canvas {
 			for (int x = 0; x < Pantalla.CUADROS_ANCHO; x++) {
 				switch (cuadros[y * this.CUADROS_ANCHO + x]) {
 				case 0:
+					// cuadro vacio
 					DibujarEnPos(x, y, this.ColeccionCuadros[0]);
 					break;
 				case 0xff00ff00:
+					// pared de abajo
 					this.ColeccionCuadros[1].setSprite(CuadroPared.AB);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case 0xff00f700:
-
+					// pared derecha
 					this.ColeccionCuadros[1].setSprite(CuadroPared.D);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 
 				case 0xff00f600:
+					// pared Arriba
 					this.ColeccionCuadros[1].setSprite(CuadroPared.A);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 
 					break;
 				case 0xff00f500:
+					// pared Izquierda
 					this.ColeccionCuadros[1].setSprite(CuadroPared.I);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case 0xff00f400:
+					// Esquina inferior derecha
 					this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaID);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case 0xff00f300:
+					// esquina inferior izquierda
 					this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaII);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case 0xff00f200:
+					// esquina derecha
 					this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaD);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case 0xff00f100:
+					// esquina izquierda
 					this.ColeccionCuadros[1].setSprite(CuadroPared.EsquinaI);
 					this.DibujarEnPos(x, y, this.ColeccionCuadros[1]);
 					break;
 				case CuadroCabeza.ID:
 					switch (Vivora.direccion) {
 					case 'd':
+						// direccion derecha
 						ColeccionCuadros[CuadroCabeza.ID].setSprite(CuadroCabeza.Derecha);
 						break;
 					case 'i':
+						// direccion izquierda
 						ColeccionCuadros[CuadroCabeza.ID].setSprite(CuadroCabeza.Izquierda);
 						break;
 					case 's':
+						// direccion abajo
 						ColeccionCuadros[CuadroCabeza.ID].setSprite(CuadroCabeza.Abajo);
 						break;
 					case 'w':
+						// direccion arriba
 						ColeccionCuadros[CuadroCabeza.ID].setSprite(CuadroCabeza.Arriba);
 						break;
 					}
 					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCabeza.ID]);
 					break;
-				case CuadroCuerpo.ID:
+				case CuadroCuerpo.IDarr:
+					// cuerpos
+					this.ColeccionCuadros[CuadroCuerpo.ID].setSprite(CuadroCuerpo.arr);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCuerpo.ID]);
+					break;
+				case CuadroCuerpo.IDabj:
+					// cuerpos
+					this.ColeccionCuadros[CuadroCuerpo.ID].setSprite(CuadroCuerpo.abj);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCuerpo.ID]);
+					break;
+				case CuadroCuerpo.IDder:
+					// cuerpos
+					this.ColeccionCuadros[CuadroCuerpo.ID].setSprite(CuadroCuerpo.der);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCuerpo.ID]);
+					break;
+				case CuadroCuerpo.IDizq:
+					// cuerpos
+					this.ColeccionCuadros[CuadroCuerpo.ID].setSprite(CuadroCuerpo.izq);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCuerpo.ID]);
+					break;
+				case CuadroCuerpo.IDcurba1:
+					// cuerpos
+					this.ColeccionCuadros[CuadroCuerpo.ID].setSprite(CuadroCuerpo.curba1);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCuerpo.ID]);
+					break;
+				case CuadroCuerpo.IDcurba2:
+					// cuerpos
+					this.ColeccionCuadros[CuadroCuerpo.ID].setSprite(CuadroCuerpo.curba2);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCuerpo.ID]);
+					break;
+				case CuadroCuerpo.IDcurba3:
+					// cuerpos
+					this.ColeccionCuadros[CuadroCuerpo.ID].setSprite(CuadroCuerpo.curba3);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCuerpo.ID]);
+					break;
+				case CuadroCuerpo.IDcurba4:
+					// cuerpos
+					this.ColeccionCuadros[CuadroCuerpo.ID].setSprite(CuadroCuerpo.curba4);
 					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCuerpo.ID]);
 					break;
 				case CuadroComida.ID:
+					// comida
 					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroComida.ID]);
 					break;
-				case CuadroCola.ID:
+				// empieza la cola
+				case CuadroCola.IDabajo:
+					// cola
+					this.ColeccionCuadros[CuadroCola.ID].setSprite(CuadroCola.abj);
 					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCola.ID]);
 					break;
+				case CuadroCola.IDarriba:
+					// cola
+					this.ColeccionCuadros[CuadroCola.ID].setSprite(CuadroCola.arr);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCola.ID]);
+					break;
+				case CuadroCola.IDizquierda:
+					// cola
+					this.ColeccionCuadros[CuadroCola.ID].setSprite(CuadroCola.izq);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCola.ID]);
+					break;
+				case CuadroCola.IDderecha:
+					// cola
+					this.ColeccionCuadros[CuadroCola.ID].setSprite(CuadroCola.Der);
+					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroCola.ID]);
+					break;
+				// termina la cola
 				case CuadroComidaBost.ID:
 					DibujarEnPos(x, y, this.ColeccionCuadros[CuadroComidaBost.ID]);
 					break;
