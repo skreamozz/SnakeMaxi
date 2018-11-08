@@ -116,8 +116,9 @@ public class Vivora {
 
 	private void ColicionConCuerpo() {
 		vidas -= 1;
-		if (vidas <= 0)
+		if (vidas == 0) {
 			Inicio.enMarcha = false;
+		}
 		x = Mapa.CUADROS_ANCHO / 2;
 		y = Mapa.CUADROS_ALTO / 2;
 		this.direccion = 'd';
@@ -128,6 +129,27 @@ public class Vivora {
 	private boolean Colicion(int val) {
 		switch (val) {
 		case CuadroCuerpo.IDarr:
+			ColicionConCuerpo();
+			return true;
+		case CuadroCuerpo.IDabj:
+			ColicionConCuerpo();
+			return true;
+		case CuadroCuerpo.IDder:
+			ColicionConCuerpo();
+			return true;
+		case CuadroCuerpo.IDizq:
+			ColicionConCuerpo();
+			return true;
+		case CuadroCuerpo.IDcurba1:
+			ColicionConCuerpo();
+			return true;
+		case CuadroCuerpo.IDcurba2:
+			ColicionConCuerpo();
+			return true;
+		case CuadroCuerpo.IDcurba3:
+			ColicionConCuerpo();
+			return true;
+		case CuadroCuerpo.IDcurba4:
 			ColicionConCuerpo();
 			return true;
 		case CuadroComida.ID:
@@ -177,7 +199,7 @@ public class Vivora {
 
 	}
 
-	private void DireccionarCuerpos() {
+	private void DireccionarCola() {
 		if (cuerpos.get(cuerpos.size() - 1).x > cola.x) {
 			if (cola.x < Mapa.CUADROS_ANCHO / 2 && cuerpos.get(cuerpos.size() - 1).x > Mapa.CUADROS_ANCHO / 2) {
 				cola.Direccion = 'a';
@@ -203,6 +225,10 @@ public class Vivora {
 				cola.Direccion = 'w';
 			}
 		}
+	}
+
+	private void DireccionarCuerpos() {
+		DireccionarCola();
 		if (cuerpos.size() > 1) {
 			for (int i = cuerpos.size() - 1; i > 0; i--) {
 				cuerpos.get(i).Estado = cuerpos.get(i - 1).Estado;
